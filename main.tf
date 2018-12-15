@@ -1,53 +1,5 @@
 # Instance creation
 
-resource "google_compute_instance" "build" {
-  name         = "okdbuild"
-  machine_type = "n1-standard-2"
-  zone         = "${var.zone}"
-  tags         = ["bastion", "ansible", "build"]
-
-  boot_disk {
-    initialize_params {
-      image = "centos-cloud/centos-7"
-      size  = "10"
-    }
-  }
-
-  # attached_disk {
-  #   source      = "${element(google_compute_disk.master-docker-vg-.*.self_link, count.index)}"
-  #   device_name = "${element(google_compute_disk.master-docker-vg-.*.name, count.index)}"
-  # }
-
-
-  // Local SSD disk
-  #   scratch_disk {
-  #   }
-
-  network_interface {
-    network = "default"
-
-    access_config {
-      // Ephemeral IP
-    }
-  }
-  metadata {
-    sshKeys = "${var.gce_ssh_user}:${file(var.ssh_public_key_filepath)}"
-  }
-
-  # provisioner "remote-exec" {
-  #   inline = [
-  #     "echo '--> Updating CentOS System'",
-  #     "yum -y update",
-  #     "reboot",
-  #   ]
-
-  #   connection {
-  #     type = "ssh"
-  #     private_key = "centos:${file(var.ssh_private_key_filepath)}"
-  #   }
-  # }
-}
-
 resource "google_compute_instance" "okdmasters" {
   count        = "${var.master_count}"
   name         = "${lookup(var.master_names, count.index)}"

@@ -14,7 +14,7 @@ variable "ssh_private_key_filepath" {
   description = "Filepath for the ssh private key"
   type        = "string"
 
-  default = "public_keys/centos.pem"
+  default = "~/.ssh/gcp-centos.pem"
 }
 
 variable "master_names" {

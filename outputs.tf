@@ -12,12 +12,6 @@ output "nodes_internal_ip" {
   description = "The internal IP addresses of the node instances"
   value       = "${google_compute_instance.okdnodes.*.network_interface.0.network_ip}"
 }
-
-output "build_instance_external_ip" {
-  description = "The external IP addresses of the build machine instance"
-  value       = "${google_compute_instance.build.0.network_interface.0.access_config.0.nat_ip}"
-}
-
 output "lb_external_ip" {
   description = "The external IP addresses of the lb instance"
   value       = "${google_compute_instance.okdlb.0.network_interface.0.access_config.0.nat_ip}"
