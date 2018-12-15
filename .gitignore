@@ -1,0 +1,21 @@
+
+# Directories
+credentials/
+public_keys/
+.terraform/
+
+# Terraform
+*.tfstate
+*.tfstate.backup
+*.tfstate.lock.info
+
+# Credentials
+credentials.json
+*credentials.json
+
+# SSH Keys
+*.pem
+*.pub
+
+# Sensitive application files
+.env
